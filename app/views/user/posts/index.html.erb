@@ -1,0 +1,15 @@
+<h1>User::Posts#index</h1>
+<p>Find me in app/views/user/posts/index.html.erb</p>
+
+
+<% @posts.each do |pos| %>
+<div>
+  <%= image_tag pos.get_image %>
+  <p>投稿ユーザー画像：<!--%= image_tag 'sample-author1.jpg' %--></p>
+  <p>ユーザーネーム：<%= pos.user.name %></p>
+  <p>説明：<%= pos.post_text %></p>
+  <p>撮影日時：<%= pos.shoot_date %></p>
+  <p>撮影時間：<%= pos.shoot_time %></p>
+  <p>撮影場所：<%= pos.shoot_address %></p>
+</div>
+<% end %>

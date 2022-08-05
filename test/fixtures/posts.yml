@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post_text: MyText
+  shoot_date: MyString
+  shoot_time: MyString
+  shoot_address: MyString
+
+two:
+  post_text: MyText
+  shoot_date: MyString
+  shoot_time: MyString
+  shoot_address: MyString

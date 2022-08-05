@@ -1,0 +1,17 @@
+<h1>User::Posts#new</h1>
+<p>Find me in app/views/user/posts/new.html.erb</p>
+<%= form_with model: @post, local: true do |form| %>
+    <h4>画像</h4>
+    <%= form.file_field :image, accept: "image/*" %>
+
+    <p><%= form.label :投稿説明 %><%= form.text_area :post_text %></p>
+    
+    <p><%= form.label :撮影日時 %><%= form.text_field :shoot_date %></p>
+    
+    <p><%= form.label :撮影時間 %><%= form.text_field :shoot_time %></p>
+    
+    <p><%= form.label :撮影場所 %><%= form.text_field :shoot_address %></p>
+    
+    <p><%= form.submit %></p>
+
+<% end %>
