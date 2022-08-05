@@ -19,6 +19,11 @@
 * 星の話題を通じて交流関係を作りたい時
 
 ## 設計書
+- 会員側・画面遷移図https://app.diagrams.net/#G18957s8WS9fKEhjwJyghiLGrYsqI0V3P-
+- 
+- ワイヤーフレームhttps://app.diagrams.net/#G1GZIORacloccLn2N3A7sLkCDecarDCQuu
+- ER図https://app.diagrams.net/#G1yI0WbRgP_cbZUD-J888ofGToDc5om0oc
+- テーブル定義書https://docs.google.com/spreadsheets/d/103Nicf6aVGv6-HHj5LvDBZZUMjw_Rfr_QgtN89c3Gng/edit#gid=0
 
 
 ## 開発環境
