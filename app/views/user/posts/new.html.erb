@@ -1,17 +1,15 @@
-<h1>User::Posts#new</h1>
-<p>Find me in app/views/user/posts/new.html.erb</p>
 <%= form_with model: @post, local: true do |form| %>
-    <h4>画像</h4>
+    <h4>投稿</h4>
     <%= form.file_field :image, accept: "image/*" %>
 
-    <p><%= form.label :投稿説明 %><%= form.text_area :post_text %></p>
+    <p><%= form.label :投稿説明 %></br><%= form.text_area :post_text, placeholder: "例）綺麗なオリオン座が撮れました" %></p>
     
-    <p><%= form.label :撮影日時 %><%= form.text_field :shoot_date %></p>
+    <p><%= form.label :撮影日時 %></br><%= form.text_field :shoot_date, placeholder: "例）2022/1/1" %></p>
     
-    <p><%= form.label :撮影時間 %><%= form.text_field :shoot_time %></p>
+    <p><%= form.label :撮影時間 %></br><%= form.text_field :shoot_time, placeholder: "例）11:11:11" %></p>
     
-    <p><%= form.label :撮影場所 %><%= form.text_field :shoot_address %></p>
+    <p><%= form.label :撮影場所 %></br><%= form.text_field :shoot_address, placeholder: "例）福島市内の山から" %></p>
     
-    <p><%= form.submit %></p>
+    <p><%= form.submit "投稿する", class: "btn btn-success" %></p>
 
 <% end %>
