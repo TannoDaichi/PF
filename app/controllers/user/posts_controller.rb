@@ -16,7 +16,23 @@ class User::PostsController < ApplicationController
   end
     
   def show
-    @posts = Post.all
+    @post = Post.find(params[:id])  
+  end
+  
+  def edit
+    @post = Post.find(params[:id])
+  end
+  
+  def update
+    @post = Post.find(params[:id])
+    @post.update(post_params)
+    redirect_to post_path(@post.id)  
+  end
+  
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to action: 'index'
   end
     
   private

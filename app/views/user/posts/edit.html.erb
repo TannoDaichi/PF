@@ -1,2 +1,19 @@
 <h1>User::Posts#edit</h1>
 <p>Find me in app/views/user/posts/edit.html.erb</p>
+<h1>編集画面</h1>
+
+<%= form_with model: @post do |f| %>
+    <h4>画像</h4>
+    <%= f.file_field :image, accept: "image/*" %>
+
+    <p><%= f.label :投稿説明 %><%= f.text_area :post_text %></p>
+    
+    <p><%= f.label :撮影日時 %><%= f.text_field :shoot_date %></p>
+    
+    <p><%= f.label :撮影時間 %><%= f.text_field :shoot_time %></p>
+    
+    <p><%= f.label :撮影場所 %><%= f.text_field :shoot_address %></p>
+    
+  <%= f.submit '保存' %>
+  
+<% end %>

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   scope module: :user do
     root :to =>"homes#top"
-    resources :posts, only: [:new, :create, :index, :show, :edit]
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]
   end
 
   namespace :admin do

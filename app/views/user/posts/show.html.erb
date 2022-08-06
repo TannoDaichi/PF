@@ -1,2 +1,15 @@
 <h1>User::Posts#show</h1>
 <p>Find me in app/views/user/posts/show.html.erb</p>
+<div>
+  <%= image_tag @post.get_image %>
+  <p>投稿ユーザー画像：<!--%= image_tag 'sample-author1.jpg' %--></p>
+  <p>ユーザーネーム：<%= @post.user.name %></p>
+  <p>説明：<%= @post.post_text %></p>
+  <p>撮影日時：<%= @post.shoot_date %></p>
+  <p>撮影時間：<%= @post.shoot_time %></p>
+  <p>撮影場所：<%= @post.shoot_address %></p>
+  <% if @post.user == current_user %>
+    <%= link_to "編集", edit_post_path(@post.id) %>
+    <%= link_to "削除", post_path(@post), method: :delete %>
+  <% end %>
+</div>
