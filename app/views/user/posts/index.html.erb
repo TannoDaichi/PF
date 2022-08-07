@@ -4,7 +4,7 @@
       <div class="col-2">
         <p>
           <%= link_to user_path(pos.user_id) do %>
-            <%= image_tag 'sample-author1.jpg' %>
+            <%= image_tag pos.user.get_profile_image(100,100) %>
           <% end %>
         </p>
       </div>

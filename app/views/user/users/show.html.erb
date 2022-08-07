@@ -1,28 +1,47 @@
+<div class="container border  mb-3 p-3">
+    <div class="row">
+      <div class="col-2">
+        <p>
+          <%= link_to user_path(@user) do %>
+            <%= image_tag @user.get_profile_image(100,100) %>
+          <% end %>
+        </p>
+      </div>
+      <div class="col-10">
+        <p class="text-left">ユーザーネーム：<%= @user.name %>（フォローする）</p>
+          <div class="d-flex flex-row">
+            <p>自己紹介：<%= @user.introduction %></p>
+          </div>
+          <div class="d-flex flex-row">
+            <% if @user == current_user %>
+              <p><%= link_to "編集",  edit_user_path(@user), class: "btn btn-success"%></p>
+            <% end %>
+          </div>
+      </div>
+    </div>
+</div>
+
 
 <div>
-  <h3><%= @user.name %></h3>
-  
+  <h3><%= @user.name %>の投稿</h3>
 </div>
 
 <% @posts.each do |pos| %>
   <div class="container border mb-3 p-3">
     <div class="row">
       <div class="col-2">
-        <p><%= image_tag pos.get_image, :size =>'100x100' %><!--%= image_tag 'sample-author1.jpg' %--></p>
+        <p>
+          <%= link_to user_path(pos.user_id) do %>
+            <%= image_tag @user.get_profile_image(100,100) %>
+          <% end %>
+        </p>
       </div>
       <div class="col-10">
         <p class="text-left">ユーザーネーム：<%= pos.user.name %></p>
-        <!--<div class="row">-->
-        <!--  <div class="col-md-11">-->
         <div class="d-flex flex-row">
             <p class="mr-3">撮影日時：<%= pos.shoot_date %></p>
-          <!--</div>-->
-          <!--<div class="col-md-11">  -->
             <p class="mr-3">撮影時間：<%= pos.shoot_time %></p>
-          <!--</div>-->
-          <!--<div class="col-md-11">  -->
             <p>説明：<%= pos.post_text %></p>
-          <!--</div>-->
         </div>
       </div>
     </div>

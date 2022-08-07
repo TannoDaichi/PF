@@ -1,30 +1,32 @@
-<% if @post.user == current_user %>
-  <%= link_to "編集", edit_post_path(@post.id) %>
-  <%= link_to "削除", post_path(@post), method: :delete %>
-<% end %>
-<div class="container border" style="padding:20px;" style="margin:10px;">
+<div claass="container text-right">
+  <div class="row">
+    <div class="col-11">
+      <p class="text-right">
+        <% if @post.user == current_user %>
+          <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
+          <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="container border mb-3 p-3">
     <div class="row">
       <div class="col-2">
         <p>
           <%= link_to user_path(@post.user_id) do %>
-            <%= image_tag @post.get_image, :size =>'100x100' %><!--%= image_tag 'sample-author1.jpg' %-->
+            <%= image_tag @post.user.get_profile_image(100,100) %>
           <% end %>
         </p>
       </div>
       <div class="col-10">
         <p class="text-left">ユーザーネーム：<%= @post.user.name %></p>
-        <!--<div class="row">-->
-          <!--<div class="col-md-11">-->
           <div class="d-flex flex-row">
             <p class="mr-3">撮影日時：<%= @post.shoot_date %></p>
-          <!--</div>-->
-          <!--<div class="col-md-11">  -->
             <p class="mr-3">撮影時間：<%= @post.shoot_time %></p>
-          <!--</div>-->
-          <!--<div class="col-md-11">  -->
             <p>説明：<%= @post.post_text %></p>
-          <!--</div>-->
-        </div>
+          </div>
       </div>
     </div>
     <div class="row">
@@ -50,10 +52,10 @@
         コメント
       </div>
     </div>
-  </div>
+</div>
   
-  <div class="container border">
-    <div class="row">
-      コメント一覧
-    </div>
+<div class="container border">
+  <div class="row">
+    コメント一覧
   </div>
+</div>

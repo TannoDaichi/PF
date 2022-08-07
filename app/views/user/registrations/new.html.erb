@@ -4,16 +4,16 @@
   
   <%= form_with model: @user, url: user_registration_path do |f| %>
   <%= render "user/shared/error_messages", resource: resource %>
-      <div class="field">
+      <div class="field mb-2">
         <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "name" %>
       </div>
-      <div class="field">
+      <div class="field mb-2">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
       </div>
-      <div class="field">
+      <div class="field mb-2">
         <%= f.password_field :password, autocomplete: "current-password", placeholder: "password(6characters~)" %>
       </div>
-      <div class="field">
+      <div class="field mb-2">
         <%= f.password_field :password_confirmation, autocomplete: "current-password", placeholder: "password confirmation" %>
       </div>
       <div class="actions" style="padding-top:10px;">
