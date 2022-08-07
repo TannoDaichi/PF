@@ -65,7 +65,7 @@
         いいね
       </div>
       <div class="col">
-        コメント
+        <p><%= link_to "#{pos.comments.count} コメント", post_path(pos.id) %></p>
       </div>
     </div>
   </div>

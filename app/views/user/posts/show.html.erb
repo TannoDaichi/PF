@@ -49,13 +49,40 @@
         いいね
       </div>
       <div class="col">
-        コメント
+        コメント<%= @post.comments.count %>
       </div>
     </div>
 </div>
+
+<div>
+  <%= form_with model: [@post, @comment] do |f| %>
+    <p><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></br><%= f.submit "コメントする", class: "btn btn-success" %></p>
+  <% end %>
+</div>
   
 <div class="container border">
-  <div class="row">
-    コメント一覧
-  </div>
+  <h3>コメント一覧</h3>
+  <% @post.comments.each do |comment| %>
+    <div class="row border-bottom p-3">
+        <div class="col-2">
+          <p>
+            <%= link_to user_path(comment.user_id) do %>
+              <%= image_tag comment.user.get_profile_image(100,100) %>
+            <% end %>
+          </p>
+        </div>
+        <div class="col-9">
+          <p class="text-left">ユーザーネーム：<%= comment.user.name %></p>
+          <div class="d-flex flex-row">
+            <p class="mr-3"><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+            <p class="mr-3"><%= comment.comment %></p>
+          </div>
+        </div>
+        <div class="col-1">
+          <% if comment.user == current_user %>
+            <p class="text-left"><%= link_to "削除", post_comment_path(comment.post,comment), method: :delete, class: "btn btn-danger" %></p>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 </div>
