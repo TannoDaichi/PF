@@ -1,3 +1,5 @@
+<h2>投稿詳細</h2>
+
 <div claass="container text-right">
   <div class="row">
     <div class="col-11">
@@ -46,7 +48,21 @@
     </div>
     <div class="row">
       <div class="col">
-        いいね
+        
+        <% if @post.liked_by?(current_user) %>
+          <p>
+            <%= link_to post_likes_path(@post), method: :delete do %>
+              ♥<%= @post.likes.count %>
+            <% end %>
+          </p>
+        <% else %>
+          <p>
+            <%= link_to post_likes_path(@post), method: :post do %>
+              ♡<%= @post.likes.count %>
+            <% end %>
+          </p>
+        <% end %>
+        
       </div>
       <div class="col">
         コメント<%= @post.comments.count %>
