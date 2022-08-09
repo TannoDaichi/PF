@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   
+  get "search" => "searches#search"
+  
   scope module: :user do
     root :to =>"homes#top"
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy]do

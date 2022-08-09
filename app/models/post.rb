@@ -16,5 +16,34 @@ class Post < ApplicationRecord
     end
     image
   end
+  
+  # 検索方法分岐
+  def self.looks(search, word)
+    # if type == "shoot_date"
+      if search == "perfect_match"
+        @post = Post.where("shoot_date LIKE?","#{word}")
+      elsif search == "forward_match"
+        @post = Post.where("shoot_date LIKE?","#{word}%")
+      elsif search == "backward_match"
+        @post = Post.where("shoot_date LIKE?","%#{word}")
+      elsif search == "partial_match"
+        @post = Post.where("shoot_date LIKE?","%#{word}%")
+      else
+        @post = Post.all
+      end
+    # elsif type == "shoot_time"
+    #   if search == "perfect_match"
+    #     @post = Post.where("shoot_time LIKE?","#{word}")
+    #   elsif search == "forward_match"
+    #     @post = Post.where("shoot_time LIKE?","#{word}%")
+    #   elsif search == "backward_match"
+    #     @post = Post.where("shoot_time LIKE?","%#{word}")
+    #   elsif search == "partial_match"
+    #     @post = Post.where("shoot_time LIKE?","%#{word}%")
+    #   else
+    #     @post = Post.all
+    #   end
+    # end
+  end
     
 end
