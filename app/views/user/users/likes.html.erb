@@ -6,12 +6,20 @@
       <div class="col-2">
         <p>
           <%= link_to user_path(pos.user_id) do %>
-            <%= image_tag @user.get_profile_image(100,100) %>
+            <%= image_tag pos.user.get_profile_image(100,100) %>
           <% end %>
         </p>
       </div>
       <div class="col-10">
-        <p class="text-left">ユーザーネーム：<%= pos.user.name %></p>
+        <p class="text-left">
+          ユーザーネーム：<%= pos.user.name %>
+          <%= link_to  user_followings_path(pos.user) do %>
+            フォロー<%= pos.user.followings.count %>
+          <% end %>
+          <%= link_to user_followers_path(pos.user) do %>
+            フォロワー<%= pos.user.followers.count %>
+          <% end %>
+        </p>
         <div class="d-flex flex-row">
             <p class="mr-3">撮影日時：<%= pos.shoot_date %></p>
             <p class="mr-3">撮影時間：<%= pos.shoot_time %></p>

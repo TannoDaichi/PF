@@ -18,32 +18,53 @@ class Post < ApplicationRecord
   end
   
   # 検索方法分岐
-  def self.looks(search, word)
-    # if type == "shoot_date"
+  def self.looks(search, shoot_type, word)
+      # 完全一致
       if search == "perfect_match"
-        @post = Post.where("shoot_date LIKE?","#{word}")
+        if shoot_type == "投稿（撮影場所）"
+          @post = Post.where("shoot_address LIKE?","#{word}")
+        elsif shoot_type == "投稿（撮影時間）"
+          @post = Post.where("shoot_time LIKE?","#{word}")
+        elsif shoot_type == "投稿（撮影日時）"
+          @post = Post.where("shoot_date LIKE?","#{word}")
+        else
+          @post = Post.all
+        end
+      # 前方一致
       elsif search == "forward_match"
-        @post = Post.where("shoot_date LIKE?","#{word}%")
+        if shoot_type == "投稿（撮影場所）"
+          @post = Post.where("shoot_address LIKE?","#{word}%")
+        elsif shoot_type == "投稿（撮影時間）"
+          @post = Post.where("shoot_time LIKE?","#{word}%")
+        elsif shoot_type == "投稿（撮影日時）"
+          @post = Post.where("shoot_date LIKE?","#{word}%")
+        else
+          @post = Post.all
+        end
+      # 後方一致
       elsif search == "backward_match"
-        @post = Post.where("shoot_date LIKE?","%#{word}")
+        if shoot_type == "投稿（撮影場所）"
+          @post = Post.where("shoot_address LIKE?","%#{word}")
+        elsif shoot_type == "投稿（撮影時間）"
+          @post = Post.where("shoot_time LIKE?","%#{word}")
+        elsif shoot_type == "投稿（撮影日時）"
+          @post = Post.where("shoot_date LIKE?","%#{word}")
+        else
+          @post = Post.all
+        end
+      # あいまい一致（検索したワードがどこかしらに入っている場合）
       elsif search == "partial_match"
-        @post = Post.where("shoot_date LIKE?","%#{word}%")
+        if shoot_type == "投稿（撮影場所）"
+          @post = Post.where("shoot_address LIKE?","%#{word}%")
+        elsif shoot_type == "投稿（撮影時間）"
+          @post = Post.where("shoot_time LIKE?","%#{word}%")
+        elsif shoot_type == "投稿（撮影日時）"
+          @post = Post.where("shoot_date LIKE?","%#{word}%")
+        else
+          @post = Post.all
+        end
       else
         @post = Post.all
       end
-    # elsif type == "shoot_time"
-    #   if search == "perfect_match"
-    #     @post = Post.where("shoot_time LIKE?","#{word}")
-    #   elsif search == "forward_match"
-    #     @post = Post.where("shoot_time LIKE?","#{word}%")
-    #   elsif search == "backward_match"
-    #     @post = Post.where("shoot_time LIKE?","%#{word}")
-    #   elsif search == "partial_match"
-    #     @post = Post.where("shoot_time LIKE?","%#{word}%")
-    #   else
-    #     @post = Post.all
-    #   end
-    # end
   end
-    
 end

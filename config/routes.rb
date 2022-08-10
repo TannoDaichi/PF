@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  namespace :user do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "user/registrations",
     sessions: 'user/sessions'
@@ -18,6 +22,9 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update]do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
       member do
         get :likes
       end

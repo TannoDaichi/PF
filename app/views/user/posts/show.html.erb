@@ -23,7 +23,14 @@
         </p>
       </div>
       <div class="col-10">
-        <p class="text-left">ユーザーネーム：<%= @post.user.name %></p>
+        <p class="text-left">
+          ユーザーネーム：<%= @post.user.name %>
+          <%= link_to  user_followings_path(@post.user) do %>
+            フォロー<%= @post.user.followings.count %>
+          <% end %>
+          <%= link_to user_followers_path(@post.user) do %>
+            フォロワー<%= @post.user.followers.count %>
+          <% end %></p>
           <div class="d-flex flex-row">
             <p class="mr-3">撮影日時：<%= @post.shoot_date %></p>
             <p class="mr-3">撮影時間：<%= @post.shoot_time %></p>
@@ -75,11 +82,11 @@
     <p><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></br><%= f.submit "コメントする", class: "btn btn-success" %></p>
   <% end %>
 </div>
-  
-<div class="container border">
-  <h3>コメント一覧</h3>
-  <% @post.comments.each do |comment| %>
-    <div class="row border-bottom p-3">
+
+<h3>コメント一覧</h3>
+<% @post.comments.each do |comment| %>
+  <div class="container border p-3">
+    <div class="row">
         <div class="col-2">
           <p>
             <%= link_to user_path(comment.user_id) do %>
@@ -100,5 +107,5 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-</div>
+  </div>
+<% end %>
