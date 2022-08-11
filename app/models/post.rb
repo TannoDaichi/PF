@@ -63,6 +63,7 @@ class Post < ApplicationRecord
         else
           @post = Post.all
         end
+        #@post = Post.where(["shoot_date LIKE ? OR shoot_time LIKE ? OR shoot_address LIKE ?","%#{word}%","%#{word}%","%#{word}%"])
       else
         @post = Post.all
       end

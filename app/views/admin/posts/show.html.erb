@@ -17,7 +17,7 @@
     <div class="row">
       <div class="col-2">
         <p>
-          <%= link_to user_path(@post.user_id) do %>
+          <%= link_to admin_user_path(@post.user_id) do %>
             <%= image_tag @post.user.get_profile_image(100,100) %>
           <% end %>
         </p>
@@ -25,12 +25,7 @@
       <div class="col-10">
         <p class="text-left">
           ユーザーネーム：<%= @post.user.name %>
-          <%= link_to  user_followings_path(@post.user) do %>
-            フォロー<%= @post.user.followings.count %>
-          <% end %>
-          <%= link_to user_followers_path(@post.user) do %>
-            フォロワー<%= @post.user.followers.count %>
-          <% end %></p>
+        </p>
           <div class="d-flex flex-row">
             <p class="mr-3">撮影日時：<%= @post.shoot_date %></p>
             <p class="mr-3">撮影時間：<%= @post.shoot_time %></p>
@@ -40,7 +35,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <%= link_to post_path(@post.id) do %>
+        <%= link_to admin_post_path(@post.id) do %>
           <%= image_tag @post.get_image, :size =>'500x300' %>
         <% end %>
       </div>
@@ -55,35 +50,15 @@
     </div>
     <div class="row">
       <div class="col">
-        <% if current_user.present? %>
-          <% if @post.liked_by?(current_user) %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :delete do %>
-                ♥<%= @post.likes.count %>
-              <% end %>
-            </p>
-          <% else %>
-            <p>
-              <%= link_to post_likes_path(@post), method: :post do %>
-                ♡<%= @post.likes.count %>
-              <% end %>
-            </p>
-          <% end %>
-        <% else %>
           いいね数：<%= @post.likes.count %>
-        <% end %>
       </div>
       <div class="col">
-        コメント<%= @post.comments.count %>
+        コメント数：<%= @post.comments.count %>
       </div>
     </div>
 </div>
 
-<div>
-  <%= form_with model: [@post, @comment] do |f| %>
-    <p><%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %></br><%= f.submit "コメントする", class: "btn btn-success" %></p>
-  <% end %>
-</div>
+
 
 <h3>コメント一覧</h3>
 <% @post.comments.each do |comment| %>
@@ -91,7 +66,7 @@
     <div class="row">
         <div class="col-2">
           <p>
-            <%= link_to user_path(comment.user_id) do %>
+            <%= link_to admin_user_path(comment.user_id) do %>
               <%= image_tag comment.user.get_profile_image(100,100) %>
             <% end %>
           </p>

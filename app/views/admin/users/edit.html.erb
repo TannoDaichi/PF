@@ -1,0 +1,18 @@
+<div class="container">
+    
+    <h2>プロフィール編集</h2>
+    
+    <%= form_with model: @user, url: admin_user_path(@user) do |f| %>
+      <div class="field mb-3">
+        <%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%>
+      </div>
+      <div class="field mb-3">
+        <%= f.text_area :introduction, id:"inputIntroduction", placeholder:"自己紹介" %>  
+      </div>
+      <div class="field mb-3">
+        <%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %>  
+      </div>
+      
+      <%= f.submit "変更を保存", class: "btn btn-success" %>
+    <% end %>
+</div>
