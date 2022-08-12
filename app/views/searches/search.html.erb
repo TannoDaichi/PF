@@ -86,23 +86,9 @@
     <div class="row">
       <div class="col">
         <!--いいね-->
-        <% if current_user.present? %>
-          <% if pos.liked_by?(current_user) %>
-            <p>
-              <%= link_to post_likes_path(pos), method: :delete do %>
-                ♥<%= pos.likes.count %>
-              <% end %>
-            </p>
-          <% else %>
-            <p>
-              <%= link_to post_likes_path(pos), method: :post do %>
-                ♡<%= pos.likes.count %>
-              <% end %>
-            </p>
-          <% end %>
-        <% else %>
-          いいね数：<%= pos.likes.count %>
-        <% end %>
+        <div id="like_buttons_<%= pos.id %>">
+          <%= render "user/likes/likes", pos: pos %>
+        </div>
       </div>
       <!--コメント-->
       <div class="col">

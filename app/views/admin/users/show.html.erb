@@ -11,17 +11,15 @@
       <div class="col-10">
         <p class="text-left">
           ユーザーネーム：<%= @user.name %>:
-            フォロー<%= @user.followings.count %>:
-            フォロワー<%= @user.followers.count %>
+          フォロー<%= @user.followings.count %>:
+          フォロワー<%= @user.followers.count %>
         </p>
           <div class="d-flex flex-row">
             <p>自己紹介：<%= @user.introduction %></p>
           </div>
           <div class="d-flex flex-row">
             <p>
-              
-                <%= link_to "編集",  edit_admin_user_path(@user), class: "btn btn-success"%>
-              
+             <%= link_to "編集",  edit_admin_user_path(@user), class: "btn btn-success"%>
             </p>
           </div>
       </div>
@@ -29,7 +27,6 @@
 </div>
 
 <h2><%= @user.name %>の投稿</h2>
-
 <% @posts.each do |pos| %>
   <div class="container border mb-3 p-3">
     <div class="row">
