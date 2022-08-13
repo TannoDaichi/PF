@@ -22,6 +22,10 @@ Rails.application.routes.draw do
       resources :comments, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update]do
+      # 退会確認画面
+      get '/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+      # 論理削除用のルーティング
+      patch '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
@@ -34,7 +38,12 @@ Rails.application.routes.draw do
   namespace :admin do
     get ""=>"homes#top"
     resources :posts, only: [:index, :show, :destroy]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update]do
+      # 退会確認画面
+      get '/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
+      # 論理削除用のルーティング
+      patch '/withdrawal' => 'users#withdrawal', as: 'withdrawal'
+    end
   end
 
 end

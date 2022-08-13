@@ -20,6 +20,7 @@
           <div class="d-flex flex-row">
             <p>
              <%= link_to "編集",  edit_admin_user_path(@user), class: "btn btn-success"%>
+             <%= link_to "退会させる",  admin_user_unsubscribe_path(@user), class: "btn btn-danger"%>
             </p>
           </div>
       </div>

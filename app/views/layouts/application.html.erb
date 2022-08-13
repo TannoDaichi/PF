@@ -69,6 +69,16 @@
       <% end %>
     </div>
     </header>
+    
+    <div class="text-center" style="padding-top:20px;">
+      <div class="text-success">
+        <%= flash[:notice] %>
+      </div>
+      <div class="text-danger">
+        <%= flash[:alret] %>
+      </div>
+    </div>
+    
     <main class="text-center" style="padding-top:50px;">
       <%= yield %>
     </main>

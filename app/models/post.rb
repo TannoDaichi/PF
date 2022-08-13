@@ -4,6 +4,11 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  
+  validates :post_text, presence: true
+  validates :shoot_date, presence: true
+  validates :shoot_time, presence: true
+  validates :shoot_address, presence: true
     
   def liked_by?(user)
     likes.exists?(user_id: user.id)

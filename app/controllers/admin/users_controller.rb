@@ -20,6 +20,15 @@ class Admin::UsersController < ApplicationController
     redirect_to action: 'show'
   end
   
+  # 退会機能
+  def withdrawal
+    @user = User.find(params[:user_id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @user.update(is_deleted: true)
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to admin_users_path
+  end
+  
   private
 
   def user_params

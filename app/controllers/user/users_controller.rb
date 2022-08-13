@@ -18,8 +18,13 @@ class User::UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to action: 'show'  
+    if @user.update(user_params)
+      flash[:notice] = "更新しました。"
+      redirect_to action: 'show'
+    else
+      flash[:alret] = "更新に失敗しました。"
+      render 'update'
+    end
   end
   
   #いいね一覧表示
@@ -29,6 +34,16 @@ class User::UsersController < ApplicationController
     @like_posts = Post.find(likes)
   end
   
+  # 退会機能
+  def withdrawal
+    @user = User.find(params[:user_id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
   
   private
 

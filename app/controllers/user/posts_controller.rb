@@ -8,8 +8,13 @@ class User::PostsController < ApplicationController
   def create
     @post = Post.new(post_params) 
     @post.user_id = current_user.id
-    @post.save 
-    redirect_to action: 'index' 
+    if @post.save 
+      flash[:notice] = "投稿しました。"
+      redirect_to action: 'index' 
+    else
+      flash[:alret] = "投稿に失敗しました。"
+       render :new
+    end
   end
     
   def index

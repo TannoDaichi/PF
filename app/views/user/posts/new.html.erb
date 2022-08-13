@@ -1,5 +1,23 @@
 <%= form_with model: @post, local: true do |form| %>
-    <h4>投稿</h4>
+    <h4>投稿する</h4>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p class="text-center">
+            <% if @post.errors.any? %>
+              <%= @post.errors.count %>件のエラーが発生しました
+              <ul style="list-style: none;" >
+                <% @post.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+    
     <%= form.file_field :image, accept: "image/*" %>
 
     <p><%= form.label :投稿説明 %></br><%= form.text_area :post_text, placeholder: "例）綺麗なオリオン座が撮れました" %></p>
