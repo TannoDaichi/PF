@@ -16,8 +16,13 @@ class Admin::UsersController < ApplicationController
   
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to action: 'show'
+    if @user.update(user_params)
+      flash[:notice] = "更新しました。"
+      redirect_to action: 'show'
+    else
+      flash[:alret] = "更新に失敗しました。名前を入力してください"
+      render 'edit'
+    end
   end
   
   # 退会機能

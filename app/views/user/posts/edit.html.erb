@@ -10,6 +10,11 @@
     
     <p><%= f.label :撮影場所 %></br><%= f.text_field :shoot_address %></p>
     
+    <p>
+        <%= f.label :is_published_flag, "公開", value: true %><%= f.radio_button :is_published_flag, 'true' %>
+        <%= f.label :is_published_flag, "非公開", value: false %><%= f.radio_button :is_published_flag,'false' %>
+    </p>
+    
   <%= f.submit '保存', class: "btn btn-success"  %>
   
 <% end %>

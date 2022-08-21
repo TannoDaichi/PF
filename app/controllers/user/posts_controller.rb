@@ -12,14 +12,13 @@ class User::PostsController < ApplicationController
       flash[:notice] = "投稿しました。"
       redirect_to action: 'index' 
     else
-      flash[:alret] = "投稿に失敗しました。"
+      flash[:alret] = "投稿に失敗しました。""空白の欄がありますのでご確認ください。"
        render :new
     end
   end
     
   def index
-    # @user = User.find(params[:id])
-    @posts = Post.all
+    @posts = Post.published
   end
     
   def show
@@ -40,8 +39,13 @@ class User::PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path(@post.id)  
+    if @post.update(post_params)
+      flash[:notice] = "更新しました。"
+      redirect_to action: 'show'
+    else
+      flash[:alret] = "更新に失敗しました。空白の欄がありますのでご確認ください。"
+      render 'edit'
+    end
   end
   
   def destroy
@@ -53,6 +57,6 @@ class User::PostsController < ApplicationController
   private
   
   def post_params 
-    params.require(:post).permit(:image, :post_text, :shoot_date, :shoot_time, :shoot_address) 
+    params.require(:post).permit(:image, :post_text, :shoot_date, :shoot_time, :shoot_address, :is_published_flag) 
   end
 end

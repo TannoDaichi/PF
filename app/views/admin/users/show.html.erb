@@ -3,9 +3,7 @@
     <div class="row">
       <div class="col-2">
         <p>
-          <%= link_to admin_user_path(@user) do %>
             <%= image_tag @user.get_profile_image(100,100) %>
-          <% end %>
         </p>
       </div>
       <div class="col-10">
@@ -28,14 +26,13 @@
 </div>
 
 <h2><%= @user.name %>の投稿</h2>
+<% if @posts.exists? %>
 <% @posts.each do |pos| %>
   <div class="container border mb-3 p-3">
     <div class="row">
       <div class="col-2">
         <p>
-          <%= link_to admin_user_path(pos.user_id) do %>
             <%= image_tag @user.get_profile_image(100,100) %>
-          <% end %>
         </p>
       </div>
       <div class="col-10">
@@ -71,4 +68,7 @@
       </div>
     </div>
   </div>
+<% end %>
+<% else %>
+  <p>投稿はありません</p>
 <% end %>

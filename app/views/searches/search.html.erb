@@ -2,99 +2,110 @@
 
 <!--検索対象モデルがUserの時 -->
 <% if @range == "ユーザー" %>
-  <% @users.each do |user| %>
-    <div class="container border  mb-3 p-3">
-        <div class="row">
-          <div class="col-2">
-            <p>
-              <% if current_admin.present? %>
-                <%= link_to admin_user_path(user) do %>
-                  <%= image_tag user.get_profile_image(100,100) %>
+  <% if @users.exists? %>
+    <% @users.each do |user| %>
+      <div class="container border  mb-3 p-3">
+          <div class="row">
+            <div class="col-2">
+              <p>
+                <% if current_admin.present? %>
+                  <%= link_to admin_user_path(user) do %>
+                    <%= image_tag user.get_profile_image(100,100) %>
+                  <% end %>
+                <% else %>
+                 <%= link_to user_path(user) do %>
+                    <%= image_tag user.get_profile_image(100,100) %>
+                  <% end %>
                 <% end %>
-              <% else %>
-               <%= link_to user_path(user) do %>
-                  <%= image_tag user.get_profile_image(100,100) %>
-                <% end %>
-              <% end %>
-            </p>
-          </div>
-          <div class="col-10">
-            <p class="text-left">ユーザーネーム：<%= user.name %></p>
-              <div class="d-flex flex-row">
-                <p>自己紹介：<%= user.introduction %></p>
-              </div>
-              <div class="d-flex flex-row">
-                <p>
-                  <%=link_to"いいね一覧",likes_user_path(user), class: "btn btn-primary" %>
-                    <% if current_user.present? && user == current_user %>
-                      <%= link_to "編集",  edit_user_path(user), class: "btn btn-success"%>
+              </p>
+            </div>
+            <div class="col-10">
+              <p class="text-left">ユーザーネーム：<%= user.name %></p>
+                <div class="d-flex flex-row">
+                  <p>自己紹介：<%= user.introduction %></p>
+                </div>
+                <div class="d-flex flex-row">
+                  <p>
+                    <% if user_signed_in? %>
+                      <%=link_to"いいね一覧",likes_user_path(user), class: "btn btn-primary" %>
                     <% end %>
-                </p>
-              </div>
+                  </p>
+                </div>
+            </div>
           </div>
-        </div>
-    </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>検索されたユーザは見つかりませんでした</p>
   <% end %>
 <!--検索対象モデルがUserではない時(= 検索対象モデルが投稿の時) -->
 <% else %>
-  <% @posts.each do |pos| %>
-   <div class="container border  mb-3 p-3">
-    <div class="row">
-      <div class="col-2">
-        <p>
+  <% if @posts.exists? %>
+    <% @posts.each do |pos| %>
+     <div class="container border  mb-3 p-3">
+      <div class="row">
+        <div class="col-2">
+          <p>
+            <% if current_admin.present? %>
+              <%= link_to admin_user_path(pos.user_id) do %>
+                <%= image_tag pos.user.get_profile_image(100,100) %>
+              <% end %>
+            <% else %>
+              <%= link_to user_path(pos.user_id) do %>
+                <%= image_tag pos.user.get_profile_image(100,100) %>
+              <% end %>
+            <% end %>
+          </p>
+        </div>
+        <div class="col-10">
+          <p class="text-left">ユーザーネーム：<%= pos.user.name %></p>
+          <div class="d-flex flex-row">
+              <p class="mr-3">撮影日時：<%= pos.shoot_date %></p>
+              <p class="mr-3">撮影時間：<%= pos.shoot_time %></p>
+              <p>説明：<%= pos.post_text %></p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <% if current_admin.present? %>
-            <%= link_to admin_user_path(pos.user_id) do %>
-              <%= image_tag pos.user.get_profile_image(100,100) %>
+            <%= link_to admin_post_path(pos.id) do %>
+              <%= image_tag pos.get_image, :size =>'500x300' %>
             <% end %>
           <% else %>
-            <%= link_to user_path(pos.user_id) do %>
-              <%= image_tag pos.user.get_profile_image(100,100) %>
+            <%= link_to post_path(pos.id) do %>
+              <%= image_tag pos.get_image, :size =>'500x300' %>
             <% end %>
           <% end %>
-        </p>
-      </div>
-      <div class="col-10">
-        <p class="text-left">ユーザーネーム：<%= pos.user.name %></p>
-        <div class="d-flex flex-row">
-            <p class="mr-3">撮影日時：<%= pos.shoot_date %></p>
-            <p class="mr-3">撮影時間：<%= pos.shoot_time %></p>
-            <p>説明：<%= pos.post_text %></p>
+        </div>
+        <div class="col">
+          <div class="row">
+            <p>撮影場所：<%= pos.shoot_address %></p>
+          </div>
+          <div class="row">
+            <%= image_tag pos.get_image, :size =>'300x200' %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <% if current_admin.present? %>
-          <%= link_to admin_post_path(pos.id) do %>
-            <%= image_tag pos.get_image, :size =>'500x300' %>
+      <div class="row">
+        <div class="col">
+          <!--いいね-->
+          <div id="like_buttons_<%= pos.id %>">
+            <%= render "user/likes/likes", pos: pos %>
+          </div>
+        </div>
+        <!--コメント-->
+        <div class="col">
+          <% if current_admin.present? %>
+            <p><%= link_to "#{pos.comments.count} コメント", admin_post_path(pos.id) %></p>
+          <% else %>
+            <p><%= link_to "#{pos.comments.count} コメント", post_path(pos.id) %></p>
           <% end %>
-        <% else %>
-          <%= link_to post_path(pos.id) do %>
-            <%= image_tag pos.get_image, :size =>'500x300' %>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="col">
-        <div class="row">
-          <p>撮影場所：<%= pos.shoot_address %></p>
-        </div>
-        <div class="row">
-          <%= image_tag pos.get_image, :size =>'300x200' %>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <!--いいね-->
-        <div id="like_buttons_<%= pos.id %>">
-          <%= render "user/likes/likes", pos: pos %>
-        </div>
-      </div>
-      <!--コメント-->
-      <div class="col">
-        <p><%= link_to "#{pos.comments.count} コメント", post_path(pos.id) %></p>
-      </div>
-    </div>
-   </div>
- <% end %>
+     </div>
+   <% end %>
+  <% else %>
+    <p>検索された投稿はありませんでした</p>
+  <% end %>
 <% end %>

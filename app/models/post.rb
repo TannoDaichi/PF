@@ -9,7 +9,12 @@ class Post < ApplicationRecord
   validates :shoot_date, presence: true
   validates :shoot_time, presence: true
   validates :shoot_address, presence: true
-    
+  
+  # 公開・非公開機能
+  scope :published, -> {where(is_published_flag: true)}
+  scope :unpublished, -> {where(is_published_flag: false)}
+  
+  # いいね機能  
   def liked_by?(user)
     likes.exists?(user_id: user.id)
   end
@@ -68,7 +73,6 @@ class Post < ApplicationRecord
         else
           @post = Post.all
         end
-        #@post = Post.where(["shoot_date LIKE ? OR shoot_time LIKE ? OR shoot_address LIKE ?","%#{word}%","%#{word}%","%#{word}%"])
       else
         @post = Post.all
       end

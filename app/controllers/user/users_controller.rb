@@ -22,8 +22,8 @@ class User::UsersController < ApplicationController
       flash[:notice] = "更新しました。"
       redirect_to action: 'show'
     else
-      flash[:alret] = "更新に失敗しました。"
-      render 'update'
+      flash[:alret] = "更新に失敗しました。名前を入力してください"
+      render 'edit'
     end
   end
   
