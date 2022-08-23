@@ -28,11 +28,14 @@
         <% end %>
       </div>
       <div class="col">
-        <div class="row">
+        <div class="row d-flex align-items-center" style="height:80px;">
           <p>撮影場所：<%= pos.shoot_address %></p>
         </div>
-        <div class="row">
-          <%= image_tag pos.get_image, :size =>'300x200' %>
+        <div class="row d-flex align-items-center" style="height:80px;">
+          <p>撮影日時：<%= pos.shoot_date %></p>
+        </div>
+        <div class="row d-flex align-items-center" style="height:80px;">
+          <p>撮影時間：<%= pos.shoot_time %></p>
         </div>
       </div>
     </div>

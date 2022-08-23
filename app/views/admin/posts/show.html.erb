@@ -27,8 +27,6 @@
           ユーザーネーム：<%= @post.user.name %>
         </p>
           <div class="d-flex flex-row">
-            <p class="mr-3">撮影日時：<%= @post.shoot_date %></p>
-            <p class="mr-3">撮影時間：<%= @post.shoot_time %></p>
             <p>説明：<%= @post.post_text %></p>
           </div>
       </div>
@@ -38,11 +36,14 @@
           <%= image_tag @post.get_image, :size =>'500x300' %>
       </div>
       <div class="col">
-        <div class="row">
+        <div class="row d-flex align-items-center" style="height:80px;">
           <p>撮影場所：<%= @post.shoot_address %></p>
         </div>
-        <div class="row">
-          <%= image_tag @post.get_image, :size =>'300x200' %>
+        <div class="row d-flex align-items-center" style="height:80px;">
+          <p>撮影日時：<%= @post.shoot_date %></p>
+        </div>
+        <div class="row d-flex align-items-center" style="height:80px;">
+          <p>撮影時間：<%= @post.shoot_time %></p>
         </div>
       </div>
     </div>
