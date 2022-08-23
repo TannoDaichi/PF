@@ -1,5 +1,5 @@
 <h2>いいねした投稿</h2>
-<% if @like_posts.exists? %>
+<% if @like_posts.present? %>
   <% @like_posts.each do |pos| %>
     <div class="container border mb-3 p-3">
       <div class="row">
