@@ -1,5 +1,6 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_guest_user, only: [:withdrawal]
   
   def show
     @user = User.find(params[:id])  
@@ -8,12 +9,17 @@ class User::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    # ゲストユーザの制限
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはこの動作はできません。'
+    else
       if @user == current_user
         render "edit"
       else
         @posts = @user.posts
         render 'show'
       end
+    end
   end
   
   def update
@@ -46,9 +52,17 @@ class User::UsersController < ApplicationController
 
   
   private
-
+  
+  # ゲストユーザの制限
+  def ensure_guest_user
+    @user = User.find(params[:user_id])
+    if @user.name == "guestuser"
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーはこの動作はできません。'
+    end
+  end
+  
   def user_params
     params.require(:user).permit(:name, :profile_image, :introduction)
   end
-  
+
 end

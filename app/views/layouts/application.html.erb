@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+      .navbar-light .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+    </style>
   </head>
 
   <body>
@@ -22,40 +27,45 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav ml-auto">
-                <% if user_signed_in? %>
-                  <li  class="nav-item" style="padding:10px;">
-                    <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to '投稿する', new_post_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to '投稿一覧', posts_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-white border' %>
-                  </li>
-                <% elsif admin_signed_in? %>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to "管理者をログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-white border' %>
-                  </li>
-                <% else %>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to '投稿一覧', posts_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-white border' %>
-                  </li>
-                  <li class="nav-item" style="padding:10px;">
-                    <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-white border' %>
-                  </li>
-                <% end %>
+                <div class="row">
+                    <% if user_signed_in? %>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to '投稿する', new_post_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-white border' %>
+                      </li>
+                    <% elsif admin_signed_in? %>
+                      <li class="col-sm-4 nav-item text-center" style="padding:10px;">
+                        <%= link_to 'ユーザー一覧', admin_users_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-sm-4 nav-item text-center" style="padding:10px;">
+                        <%= link_to '投稿一覧', admin_posts_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-sm-4 nav-item text-center" style="padding:10px;">
+                        <%= link_to "管理者をログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-white border' %>
+                      </li>
+                    <% else %>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to 'ゲストログイン', user_guest_sign_in_path, class: "nav-link text-white border", method: :post %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to '投稿一覧', posts_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-white border' %>
+                      </li>
+                      <li class="col-md-3 nav-item text-center" style="padding:10px;">
+                        <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-white border' %>
+                      </li>
+                    <% end %>
+                </div>
               </ul>
             </div>
         </div>
