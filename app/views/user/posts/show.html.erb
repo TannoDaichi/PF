@@ -18,7 +18,7 @@
       <div class="col-2">
         <p>
           <%= link_to user_path(@post.user_id) do %>
-            <%= image_tag @post.user.get_profile_image(100,100) %>
+            <%= image_tag @post.user.get_profile_image(100,100), style: "max-width: 150%;" %>
           <% end %>
         </p>
       </div>
@@ -38,7 +38,7 @@
     </div>
     <div class="row">
       <div class="col">
-          <%= image_tag @post.get_image, :size =>'500x300' %>
+          <%= image_tag @post.get_image, style: "max-width: 500px; width: 100%;" %>
       </div>
       <div class="col">
         <div class="row d-flex align-items-center" style="height:80px;">
@@ -78,7 +78,7 @@
           <div class="col-2">
             <p>
               <%= link_to user_path(comment.user_id) do %>
-                <%= image_tag comment.user.get_profile_image(100,100) %>
+                <%= image_tag comment.user.get_profile_image(100,100), style: "max-width: 150%;" %>
               <% end %>
             </p>
           </div>

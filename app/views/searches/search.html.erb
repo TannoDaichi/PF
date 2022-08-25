@@ -10,11 +10,11 @@
               <p>
                 <% if current_admin.present? %>
                   <%= link_to admin_user_path(user) do %>
-                    <%= image_tag user.get_profile_image(100,100) %>
+                    <%= image_tag user.get_profile_image(100,100), style: "max-width: 150%;" %>
                   <% end %>
                 <% else %>
                  <%= link_to user_path(user) do %>
-                    <%= image_tag user.get_profile_image(100,100) %>
+                    <%= image_tag user.get_profile_image(100,100), style: "max-width: 150%;" %>
                   <% end %>
                 <% end %>
               </p>
@@ -48,11 +48,11 @@
           <p>
             <% if current_admin.present? %>
               <%= link_to admin_user_path(pos.user_id) do %>
-                <%= image_tag pos.user.get_profile_image(100,100) %>
+                <%= image_tag pos.user.get_profile_image(100,100), style: "max-width: 150%;" %>
               <% end %>
             <% else %>
               <%= link_to user_path(pos.user_id) do %>
-                <%= image_tag pos.user.get_profile_image(100,100) %>
+                <%= image_tag pos.user.get_profile_image(100,100), style: "max-width: 150%;" %>
               <% end %>
             <% end %>
           </p>
@@ -68,11 +68,11 @@
         <div class="col">
           <% if current_admin.present? %>
             <%= link_to admin_post_path(pos.id) do %>
-              <%= image_tag pos.get_image, :size =>'500x300' %>
+              <%= image_tag pos.get_image, style: "max-width: 500px; width: 100%;" %>
             <% end %>
           <% else %>
             <%= link_to post_path(pos.id) do %>
-              <%= image_tag pos.get_image, :size =>'500x300' %>
+              <%= image_tag pos.get_image, style: "max-width: 500px; width: 100%;" %>
             <% end %>
           <% end %>
         </div>

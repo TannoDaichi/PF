@@ -6,7 +6,7 @@
         <div class="col-2">
           <p>
             <%= link_to user_path(pos.user_id) do %>
-              <%= image_tag pos.user.get_profile_image(100,100) %>
+              <%= image_tag pos.user.get_profile_image(100,100), style: "max-width: 150%;" %>
             <% end %>
           </p>
         </div>
@@ -21,8 +21,6 @@
             <% end %>
           </p>
           <div class="d-flex flex-row">
-              <p class="mr-3">撮影日時：<%= pos.shoot_date %></p>
-              <p class="mr-3">撮影時間：<%= pos.shoot_time %></p>
               <p>説明：<%= pos.post_text %></p>
           </div>
         </div>
@@ -30,7 +28,7 @@
       <div class="row">
         <div class="col">
           <%= link_to post_path(pos.id) do %>
-            <%= image_tag pos.get_image, :size =>'500x300' %>
+            <%= image_tag pos.get_image, style: "max-width: 500px; width: 100%;" %>
           <% end %>
         </div>
         <div class="col">
