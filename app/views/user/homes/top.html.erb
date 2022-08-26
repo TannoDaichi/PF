@@ -1,9 +1,13 @@
-<h1>Welcome to Stargazer !</h1>
+<h1>Welcome to Stargazer!</h1>
 
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            ゲストログインとして<%= link_to 'ログイン', user_guest_sign_in_path, method: :post %>する
+            <% if user_signed_in? %>
+                ゲストとしてログインしています
+            <% else %>
+                ゲストとして<%= link_to 'ログイン', user_guest_sign_in_path, method: :post %>する
+            <% end %>
         </div>
     </div>
 </div>

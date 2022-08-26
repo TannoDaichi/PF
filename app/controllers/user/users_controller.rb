@@ -11,7 +11,7 @@ class User::UsersController < ApplicationController
     @user = User.find(params[:id])
     # ゲストユーザの制限
     if @user.name == "guestuser"
-      redirect_to user_path(current_user) , notice: 'ゲストユーザーはこの動作はできません。'
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーを編集することはできません。'
     else
       if @user == current_user
         render "edit"
@@ -57,7 +57,7 @@ class User::UsersController < ApplicationController
   def ensure_guest_user
     @user = User.find(params[:user_id])
     if @user.name == "guestuser"
-      redirect_to user_path(current_user) , notice: 'ゲストユーザーはこの動作はできません。'
+      redirect_to user_path(current_user) , notice: 'ゲストユーザーで退会することはできません。'
     end
   end
   
