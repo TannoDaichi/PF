@@ -3,10 +3,14 @@
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <% if user_signed_in? %>
-                ゲストとしてログインしています
+            <% if admin_signed_in? %>
+                管理者としてログインしています
             <% else %>
-                ゲストとして<%= link_to 'ログイン', user_guest_sign_in_path, method: :post %>する
+                <% if user_signed_in? %>
+                    ゲストとしてログインしています
+                <% else %>
+                    ゲストとして<%= link_to 'ログイン', user_guest_sign_in_path, method: :post %>する
+                <% end %>
             <% end %>
         </div>
     </div>
