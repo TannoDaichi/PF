@@ -1,5 +1,6 @@
-class User::LikesController < ApplicationController
+# frozen_string_literal: true
 
+class User::LikesController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     like = current_user.likes.new(post_id: @post.id)
@@ -13,5 +14,4 @@ class User::LikesController < ApplicationController
     like.destroy
     # redirect_to post_path(post)
   end
-
 end

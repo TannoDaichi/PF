@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Relationship < ApplicationRecord
   # class_name: "User"でUserモデルを参照
   belongs_to :follower, class_name: "User"

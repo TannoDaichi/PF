@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class User::RelationshipsController < ApplicationController
   before_action :authenticate_user!
-  
+
   # フォローするとき
   def create
     current_user.follow(params[:user_id])
@@ -9,7 +11,7 @@ class User::RelationshipsController < ApplicationController
   # フォロー外すとき
   def destroy
     current_user.unfollow(params[:user_id])
-    redirect_to request.referer  
+    redirect_to request.referer
   end
   # フォロー一覧
   def followings

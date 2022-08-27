@@ -36,7 +36,6 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.timestamps null: false
       ## 名前を保存するカラム
       t.string :name
-      
     end
 
     add_index :users, :email,                unique: true

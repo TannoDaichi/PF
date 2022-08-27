@@ -1,5 +1,6 @@
-class SearchesController < ApplicationController
+# frozen_string_literal: true
 
+class SearchesController < ApplicationController
   def search
     @range = params[:range]
 
@@ -9,5 +10,4 @@ class SearchesController < ApplicationController
       @posts = Post.looks(params[:search], params[:range], params[:word])
     end
   end
-  
 end

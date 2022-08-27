@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User::CommentsController < ApplicationController
   before_action :authenticate_user!
 
@@ -8,16 +10,14 @@ class User::CommentsController < ApplicationController
     @comment.save
     redirect_to post_path(@post)
   end
-  
+
   def destroy
     Comment.find(params[:id]).destroy
     redirect_to post_path(params[:post_id])
   end
 
   private
-
-  def comment_params
-    params.require(:comment).permit(:comment)
-  end
-
+    def comment_params
+      params.require(:comment).permit(:comment)
+    end
 end
