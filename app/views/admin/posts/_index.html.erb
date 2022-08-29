@@ -1,11 +1,10 @@
-<h2>いいねした投稿</h2>
-<% if @like_posts.present? %>
-  <% @like_posts.each do |pos| %>
+<% if posts.exists? %>
+  <% posts.each do |pos| %>
     <div class="container border mb-3 p-3 shadow">
       <div class="row">
         <div class="col-2">
           <p>
-            <%= link_to user_path(pos.user_id) do %>
+            <%= link_to admin_user_path(pos.user_id) do %>
               <%= image_tag pos.user.get_profile_image(100,100), style: "max-width: 150%;" %>
             <% end %>
           </p>
@@ -13,12 +12,6 @@
         <div class="col-10">
           <p class="text-left">
             ユーザーネーム：<%= pos.user.name %>
-            <%= link_to  user_followings_path(pos.user) do %>
-              フォロー<%= pos.user.followings.count %>
-            <% end %>
-            <%= link_to user_followers_path(pos.user) do %>
-              フォロワー<%= pos.user.followers.count %>
-            <% end %>
           </p>
           <div class="d-flex flex-row">
               <p>説明：<%= pos.post_text %></p>
@@ -27,7 +20,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <%= link_to post_path(pos.id) do %>
+          <%= link_to admin_post_path(pos.id) do %>
             <%= image_tag pos.get_image, style: "max-width: 500px; width: 100%;" %>
           <% end %>
         </div>
@@ -45,16 +38,14 @@
       </div>
       <div class="row">
         <div class="col">
-          <div id="like_buttons_<%= pos.id %>">
-            <%= render "user/likes/likes", pos: pos %>
-          </div>
+            いいね数：<%= pos.likes.count %>
         </div>
         <div class="col">
-          <p><%= link_to "#{pos.comments.count} コメント", post_path(pos.id) %></p>
+          コメント数：<%= pos.comments.count %>
         </div>
       </div>
     </div>
   <% end %>
 <% else %>
-  <p>いいねした投稿はありません</p>
+  <p>投稿はありません</p>
 <% end %>

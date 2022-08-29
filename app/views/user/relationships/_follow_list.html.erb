@@ -1,11 +1,11 @@
 <% if users.exists? %>
   <% users.each do |user| %>
-      <div class="container border  mb-3 p-3">
+      <div class="container border  mb-3 p-3 shadow">
         <div class="row">
           <div class="col-2">
             <p>
               <%= link_to user_path(user) do %>
-                <%= image_tag user.get_profile_image(100,100) %>
+                <%= image_tag user.get_profile_image(100,100), style: "max-width: 150%;" %>
               <% end %>
             </p>
           </div>

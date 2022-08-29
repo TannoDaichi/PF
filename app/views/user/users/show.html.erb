@@ -1,5 +1,5 @@
 <h2><%= @user.name %>の情報</h2>
-<div class="container border  mb-3 p-3">
+<div class="container border  mb-3 p-3 shadow">
     <div class="row">
       <div class="col-2">
         <p>
@@ -46,52 +46,4 @@
 </div>
 
 <h2><%= @user.name %>の投稿</h2>
-<% if @posts.exists? %>
-  <% @posts.each do |pos| %>
-    <div class="container border mb-3 p-3">
-      <div class="row">
-        <div class="col-2">
-          <p>
-            <%= image_tag @user.get_profile_image(100,100), style: "max-width: 150%;"  %>
-          </p>
-        </div>
-        <div class="col-10">
-          <p class="text-left">ユーザーネーム：<%= pos.user.name %></p>
-          <div class="d-flex flex-row">
-              <p>説明：<%= pos.post_text %></p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <%= link_to post_path(pos.id) do %>
-            <%= image_tag pos.get_image, style: "max-width: 500px; width: 100%;"  %>
-          <% end %>
-        </div>
-        <div class="col">
-          <div class="row d-flex align-items-center" style="height:80px;">
-            <p>撮影場所：<%= pos.shoot_address %></p>
-          </div>
-          <div class="row d-flex align-items-center" style="height:80px;">
-            <p>撮影日時：<%= pos.shoot_date %></p>
-          </div>
-          <div class="row d-flex align-items-center" style="height:80px;">
-            <p>撮影時間：<%= pos.shoot_time %></p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div id="like_buttons_<%= pos.id %>">
-            <%= render "user/likes/likes", pos: pos %>
-          </div>
-        </div>
-        <div class="col">
-          <p><%= link_to "#{pos.comments.count} コメント", post_path(pos.id) %></p>
-        </div>
-      </div>
-    </div>
-  <% end %>
-<% else %>
-  <p>投稿はありません</p>
-<% end %>
+<%= render 'user/posts/index', posts: @posts %>
